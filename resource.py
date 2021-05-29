@@ -35,11 +35,13 @@ def resource_allocation():
                     if v[i][j][0] < v[i-1][j - k][0] + csv_reader[k+1][i]:
                         v[i][j][0] = v[i-1][j - k][0] + csv_reader[k+1][i]
                         v[i][j][1] = k   
-
-    for i in range(1, proj + 1):
-        for j in range(maxlim):
-            print(v[i][j], " ", end="")
-        print()
+    print()
+    show_table = input("Would you like to see DP table (unrecommended for huge tables) T/F: ")
+    if show_table == "T":
+        for i in range(1, proj + 1):
+            for j in range(maxlim):
+                print(v[i][j], " ", end="")
+            print()
 
     rewind_start = proj
     max_value = max(v[-1][j][0] for j in range(maxlim))
