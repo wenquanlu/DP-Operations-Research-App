@@ -1,18 +1,18 @@
 import csv
 
 def knapsack(S, W, max_weight):
-    B = [[None for x in range(max_weight)] for y in range(len(W) + 1)]
-    for i in range(max_weight):
+    B = [[None for x in range(max_weight + 1)] for y in range(len(W) + 1)]
+    for i in range(max_weight + 1):
         B[0][i] = 0
     for row in range(1, len(W) + 1):
-        for w in range(max_weight):
+        for w in range(max_weight + 1):
             k = row - 1
             if W[k] > w:
                 B[row][w] = B[row - 1][w]
             else:
                 B[row][w] = max(B[row - 1][w], B[row-1][w - W[k]] + S[k])
     bit_result = [0 for x in range(len(W))]
-    start_col = max_weight - 1
+    start_col = max_weight
     start_row = len(W)
     max_profit = B[start_row][start_col]
     print()
@@ -31,7 +31,7 @@ def knapsack(S, W, max_weight):
             bit_result[start_row -1] =1
             max_profit -= S[start_row - 1]
             start_row -= 1
-            for i in range(max_weight):
+            for i in range(max_weight + 1):
                 if (B[start_row][i] == max_profit):
                     start_col = i
         else:
